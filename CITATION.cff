@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this project, please cite it using the metadata in this file."
+title: "C-V2X Mode 4 Reliability Across Montreal Scenarios"
+type: software
+license: LGPL-3.0-only
+repository-code: "https://github.com/abdelrahman-fawaz18/cv2x-mode4-montreal"
+abstract: >-
+  Simulation and analysis project evaluating C-V2X Mode 4 broadcast
+  reliability across dense city-center and lower-density Montreal scenarios.
+authors:
+  - family-names: "Elsayed"
+    given-names: "Abdelrahman"
+keywords:
+  - C-V2X
+  - Mode 4
+  - vehicular networks
+  - OMNeT++
+  - Veins
+  - SUMO
+  - packet reception rate
+  - channel busy ratio

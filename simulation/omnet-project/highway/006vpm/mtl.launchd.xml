@@ -1,0 +1,7 @@
+<launch>
+  <basedir path="/home/veins/Activity3/Activity_3_D_updated/highway/006vpm"/>
+  <copy file="mtl.net.xml"/>
+  <copy file="mtl.rou.xml"/>
+  <copy file="mtl.poly.xml"/>
+  <copy file="mtl.sumo.cfg" type="config"/>
+</launch>

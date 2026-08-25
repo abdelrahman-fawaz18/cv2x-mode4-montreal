@@ -1,0 +1,2 @@
+# Keep simulation and data files byte-stable across platforms.
+* -text
