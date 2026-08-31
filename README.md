@@ -1,10 +1,12 @@
 # C-V2X Mode 4 Reliability Across Montreal Scenarios
 
-**A simulation and data-analysis study of direct C-V2X broadcast reliability on two real Montreal road layouts.**
+**A descriptive simulation and data-analysis study of direct C-V2X broadcast reliability on two real Montreal road layouts.**
 
 > How does broadcast reliability change as more vehicles share the channel, and how strongly do road layout and fading affect the result?
 
 I built a controlled C-V2X Mode 4 experiment using OMNeT++, Veins, SUMO, and OpenCV2X. Vehicles exchanged 190-byte broadcast messages over direct sidelink communication. I varied the road environment, vehicle count, and fading model, then used Python to measure packet reception rate, channel occupancy, and receiver-level variation.
+
+This is a descriptive study: each of the 24 conditions contains one 100-second run, so the results characterize this experiment rather than estimate broader real-world performance.
 
 ## Study at a glance
 
@@ -13,7 +15,7 @@ I built a controlled C-V2X Mode 4 experiment using OMNeT++, Veins, SUMO, and Ope
 | Road environments | Dense Montreal city-center grid and lower-density corridor |
 | Communicating vehicles | 5, 10, 15, 20, 25, and 30 |
 | Fading models | JAKES and NAKAGAMI |
-| Experiment matrix | 24 scenario/fading/vehicle-count combinations |
+| Experiment matrix | 24 scenario/fading/vehicle-count combinations; one run per combination |
 | Simulation time | 100 seconds per run |
 | Radio configuration | 23 dBm transmit power; 3 subchannels; 16 resource blocks per subchannel |
 | Main outputs | Aggregate PRR, per-receiver PRR statistics, and mean CBR |
@@ -71,7 +73,7 @@ The formulas and scalar-selection rules are documented in [the methodology](docs
 
 ![PRR versus vehicle count](figures/results/prr-vs-vehicle-count.png)
 
-- City-center PRR rose from **74.39% / 74.88%** at five vehicles to **84.98% / 85.20%** at 25 vehicles for JAKES and NAKAGAMI.
+- In these runs, city-center PRR rose from **74.39% / 74.88%** at five vehicles to **84.98% / 85.20%** at 25 vehicles for JAKES and NAKAGAMI.
 - Lower-density PRR rose from **54.26% / 54.01%** to **68.59% / 68.87%** over the same range.
 - PRR declined slightly at 30 vehicles in all four cases, marking 25 vehicles as the best observed point in this experiment.
 - The city-center layout led the lower-density layout by **16.33 to 21.59 percentage points** across matched cases.
@@ -85,12 +87,12 @@ The formulas and scalar-selection rules are documented in [the methodology](docs
 
 > In the original result-figure legends, **Rural** is the short label for the lower-density Montreal corridor.
 
-## Engineering interpretation
+## Interpretation of the observed runs
 
-- **Road layout had the strongest effect.** The dense city-center network consistently produced higher aggregate PRR.
-- **The fading choice had a small effect.** The largest JAKES-to-NAKAGAMI PRR difference was 0.72 percentage points.
+- **Road layout produced the largest observed difference.** The dense city-center network consistently produced higher aggregate PRR in the tested matrix.
+- **The fading choice produced a small observed difference.** The largest JAKES-to-NAKAGAMI PRR difference was 0.72 percentage points.
 - **Receiver experience was less uniform in the lower-density scenario.** Its receiver-side PRR spread was wider and its minimum values were lower.
-- **More vehicles helped until the highest tested load.** Reception opportunities improved through 25 vehicles; the decline at 30 vehicles coincided with higher channel occupancy.
+- **PRR increased through 25 vehicles, then dipped at 30.** The decline at the highest tested vehicle count coincided with higher channel occupancy.
 
 ## Repository guide
 
@@ -122,6 +124,8 @@ python analysis/extended_metrics_batch_plot.py `
 
 Input filenames encode the scenario, fading model, and vehicle count, for example `city_center_Nakagami_05.csv`. Each execution creates a timestamped output directory with detailed metrics, grouped summaries, a compact results table, and both plots.
 
+The repository includes two representative compressed exports, not the full 24-run input matrix used for the published figures. The command above applies to a complete local export set.
+
 ## Simulation entry points
 
 - [`omnetpp.ini`](simulation/omnet-project/omnetpp.ini) contains the main experiment configuration.
@@ -139,3 +143,4 @@ The `.launchd.xml` files contain `/home/veins/...` paths from the original Linux
 ## License and attribution
 
 Project code and documentation are released under `LGPL-3.0-only`. OpenStreetMap-derived assets remain subject to the Open Database License. The included `Highway.ned` file retains its SimuLTE/OpenCV2X LGPL terms. See [LICENSES.md](LICENSES.md) and [NOTICE.md](NOTICE.md).
+
