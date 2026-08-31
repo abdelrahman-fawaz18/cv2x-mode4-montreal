@@ -6,8 +6,6 @@
 
 I built a controlled C-V2X Mode 4 experiment using OMNeT++, Veins, SUMO, and OpenCV2X. Vehicles exchanged 190-byte broadcast messages over direct sidelink communication. I varied the road environment, vehicle count, and fading model, then used Python to measure packet reception rate, channel occupancy, and receiver-level variation.
 
-This is a descriptive study: each of the 24 conditions contains one 100-second run, so the results characterize this experiment rather than estimate broader real-world performance.
-
 ## Study at a glance
 
 | Item | Evaluated setting |
